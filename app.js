@@ -67,8 +67,8 @@ const startServer = () => {
 
 // Initialize CRON job for directory cleaning
 const initializeCronJob = () => {
-    // Run every 4 hours: At minute 0 of every 4th hour
-    cron.schedule('0 */4 * * *', () => {
+    // Run every 2 hours: At minute 0 of every 4th hour
+    cron.schedule('0 */2 * * *', () => {
         try {
             logger('Starting scheduled directory cleanup', 'INFO');
             cleanDirectory();
