@@ -39,8 +39,9 @@ const handleShare = (req, res) => {
         res.status(400).render('share_files', { files: files, token: token });
 
     } catch (err) {
-        logger(`Error during file share: ${err.message}`, 'ERROR'); 
-        res.status(400).render('404_page'); 
+        logger(`Error during file share: Valid directory no longer exists`, 'ERROR'); 
+        const errorMessage = "The file you are trying to access is no longer available. It may have been removed from the server. Please check the link or contact the sender.";
+        res.render('404_page.ejs', { errorMessage: errorMessage });
     }
 }
 
