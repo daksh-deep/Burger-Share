@@ -10,7 +10,9 @@ function getDirectories(dirPath) {
 }
 
 const cleanDirectory = () => {
-    const targetDir = './uploads';
+
+    // Get targetDir from Environment Variables (CLEAN_DIR_PATH)
+    const targetDir = process.env.CLEAN_DIR_PATH;
     const directories = getDirectories(targetDir);
 
     for (let i = 0; i < directories.length; i++) {
