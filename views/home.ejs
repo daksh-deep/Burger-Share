@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Burger Share - Share files with ease. Upload and generate shareable URLs that are end-to-end encrypted.">
+    <title>Burger Share</title>
+    <link rel="stylesheet" href="/CSS/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="bg-black text-white">
+    <div class="flex justify-center items-center min-h-screen w-full p-4">
+        <div class="w-full max-w-2xl">
+            <!-- Navigation Bar -->
+            <%- include('partials/navbar') %>
+
+            <!-- Main Content -->
+            <div class="text-center">
+                <!-- Title -->
+                <h1 class="text-5xl md:text-7xl mb-6">
+                    <span class="text-yellow-500">Burger</span> Share
+                </h1>
+
+                <!-- Description -->
+                <p class="text-lg md:text-xl mb-3">
+                    Share files with ease. Upload and generate a sharable URL in seconds. Note: Shareable URLs are only valid for 2 hours.
+                </p>
+                <p class="text-sm md:text-base text-gray-400 mb-12">
+                    End-to-end encrypted
+                </p>
+
+                <!-- Error Message -->
+                <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+                    <div class="mb-8 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg">
+                        <strong>Error:</strong> <%= errorMessage %>
+                    </div>
+                <% } %>
+
+                <!-- File Upload Form -->
+                <div class="space-y-6">
+                    <form action="/system" enctype="multipart/form-data" method="post" class="flex flex-col md:flex-row items-center justify-center gap-4">
+                        <label for="user_file" class="cursor-pointer px-8 py-3 text-sm md:text-base font-medium bg-transparent border border-gray-500 rounded-full hover:bg-gray-800 transition-colors duration-200 inline-block">
+                            Select Files
+                            <input type="file" id="user_file" name="user_file" class="hidden" multiple onchange="updateFileCount()">
+                        </label>
+                        <button type="submit" class="px-8 py-3 text-sm md:text-base font-medium bg-green-500 text-black rounded-full hover:bg-green-400 transition-colors duration-200 inline-block">
+                            Share Files
+                        </button>
+                    </form>
+                    <p id="fileCount" class="text-sm md:text-base text-gray-400">No files selected</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateFileCount() {
+            const fileInput = document.getElementById('user_file');
+            const fileCountDisplay = document.getElementById('fileCount');
+
+            const fileCount = fileInput.files.length;
+
+            if (fileCount === 0) {
+                fileCountDisplay.textContent = "No files selected";
+            } else {
+                fileCountDisplay.textContent = `${fileCount} file${fileCount > 1 ? 's' : ''} selected`;
+            }
+        }
+    </script>
+</body>
+
+</html>

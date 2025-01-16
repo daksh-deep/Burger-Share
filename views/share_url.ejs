@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character Encoding and Viewport Settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page Title -->
+    <title>Share Link | Burger Share</title>
+
+    <!-- External Stylesheet Link -->
+    <link rel="stylesheet" href="/CSS/global.css">
+
+    <!-- TailwindCSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Favicon for the webpage -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body class="bg-black text-white">
+    <div class="flex justify-center items-center min-h-screen w-full p-4">
+        <div class="w-full max-w-md">
+            
+            <!-- Navigation Bar (Include Partial for Reusability) -->
+            <%- include('partials/back_nav') %>
+
+            <!-- Heading and Instructions -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Your Share Link</h1>
+                <p class="text-gray-400 text-sm md:text-base">Copy this link to share your files</p>
+            </div>
+            
+            <!-- Share Link Container -->
+            <div class="bg-gray-900 rounded-lg p-4 shadow-xl">
+                <div class="flex flex-col md:flex-row gap-3">
+                    <!-- Share URL Input Field -->
+                    <input
+                        type="text"
+                        id="shareUrl"
+                        readonly
+                        class="flex-1 px-4 py-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm md:text-base"
+                        value="<%= url %>" 
+                    >
+
+                    <!-- Copy Button -->
+                    <button 
+                        onclick="copyToClipboard()"
+                        class="px-6 py-3 bg-green-500 hover:bg-green-400 text-black font-medium rounded-lg transition-colors duration-200 text-sm md:text-base"
+                    >
+                        Copy
+                    </button>
+                </div>
+                
+                <!-- Message that confirms the link has been copied -->
+                <p id="copyMessage" class="mt-2 text-center text-green-500 text-sm hidden">
+                    Link copied to clipboard!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to Handle Clipboard Copy Action -->
+    <script>
+        // Function to copy the share URL to clipboard
+        function copyToClipboard() {
+            const urlInput = document.getElementById('shareUrl');
+            const copyMessage = document.getElementById('copyMessage');
+            
+            // Select the input value and copy it to clipboard
+            urlInput.select();
+            navigator.clipboard.writeText(urlInput.value);
+            
+            // Show confirmation message
+            copyMessage.classList.remove('hidden');
+            setTimeout(() => {
+                copyMessage.classList.add('hidden');
+            }, 2000); // Hide message after 2 seconds
+        }
+    </script>
+</body>
+</html>

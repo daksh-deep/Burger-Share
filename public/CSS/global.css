@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "MixLight";
+  src: url("/fonts/Mix-Light.woff2") format("woff2");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MixRegular";
+  src: url("/fonts/Mix-Regular.woff2") format("woff2");
+  font-style: normal;
+}
+
+
+
+h1 {
+    font-family: 'MixRegular', sans-serif;
+}
+
+p {
+    font-family: 'MixLight', sans-serif;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Burger Share - Share files easily with your friends">
+    <title>Shared Files | Burger Share</title>
+    <link rel="stylesheet" href="/CSS/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="bg-black text-white">
+    <!-- Navigation Bar -->
+    <%- include('partials/back_nav') %>
+
+    <!-- Main Content - With top margin to account for fixed nav -->
+    <div class="mt-24 min-h-screen w-full p-4 md:p-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header Section -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Shared Files</h1>
+                <p class="text-gray-400 text-sm md:text-lg">Click on any file to start downloading</p>
+            </div>
+
+            <!-- Files Section -->
+            <div class="space-y-3 mb-12">
+                <% if (files && files.length > 0) { %>
+                    <% files.forEach(function(file) { %>
+                        <div class="group bg-[#202120] rounded-lg hover:bg-[#252925] transition-all duration-200">
+                            <a href="/uploads/<%= token %>/<%= file %>" target="_blank"
+                               class="flex items-center justify-between p-4 md:p-6">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm md:text-lg font-medium text-white"><%= file %></span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="hidden group-hover:block text-green-500 text-sm md:text-base mr-2">Download</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="bg-red-500/10 border border-red-500 text-red-500 p-6 rounded-lg text-center">
+                        <p class="text-lg">No files available to share</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
