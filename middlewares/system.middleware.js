@@ -3,7 +3,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const path = require('path');
-const logger = require('../Logger/logger'); 
+const logger = require('../Logger/logger');  
 dotenv.config();
 
 function create_storage_partition(token) {

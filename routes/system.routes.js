@@ -3,8 +3,8 @@ const express = require('express');
 const multer = require('multer');
 const { handleUpload, handleShare } = require('../controllers/system.controller');
 const { create_token_middleware, verify_token_middleware } = require('../middlewares/system.middleware');
-const logger = require('../Logger/logger');  
-
+const logger = require('../Logger/logger');
+  
 // Express router
 const router = express.Router();
 

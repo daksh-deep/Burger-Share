@@ -1,13 +1,14 @@
-// app.js
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
-const favicon = require('express-favicon');
 const fs = require('fs');
+const favicon = require('express-favicon');
 const cron = require('node-cron');
 const systemRoutes = require('./routes/system.routes');
 const logger = require('./Logger/logger');  
+const keepAlive = require('./utils/keepAlive'); 
 const cleanDirectory = require('./clean');
+const healthRoutes = require('./routes/healthRoutes');
 
 // Initialization
 dotenv.config();
@@ -67,7 +68,7 @@ const startServer = () => {
 
 // Initialize CRON job for directory cleaning
 const initializeCronJob = () => {
-    // Run every 2 hours: At minute 0 of every 4th hour
+    // Run every 2 hours: At minute 0 of every 2nd hour
     cron.schedule('0 */2 * * *', () => {
         try {
             logger('Starting scheduled directory cleanup', 'INFO');
@@ -88,6 +89,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // Routes
 app.use('/', systemRoutes);
+app.use('/health', healthRoutes);
 
 // Initialize application
 const initialize = async () => {
@@ -95,8 +97,9 @@ const initialize = async () => {
         // Initialize required directories
         initializeDirectories();
         
-        // Setup CRON job
+        // Setup CRON jobs
         initializeCronJob();
+        keepAlive();
         
         // Start the server
         startServer();
