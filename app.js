@@ -88,8 +88,8 @@ app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // Routes
-app.use('/', systemRoutes);
 app.use('/health', healthRoutes);
+app.use('/', systemRoutes);
 
 // Initialize application
 const initialize = async () => {
