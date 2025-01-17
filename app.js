@@ -6,7 +6,6 @@ const favicon = require('express-favicon');
 const cron = require('node-cron');
 const systemRoutes = require('./routes/system.routes');
 const logger = require('./Logger/logger');  
-const keepAlive = require('./utils/keepAlive'); 
 const cleanDirectory = require('./clean');
 const healthRoutes = require('./routes/healthRoutes');
 
@@ -99,8 +98,7 @@ const initialize = async () => {
         
         // Setup CRON jobs
         initializeCronJob();
-        keepAlive();
-        
+                
         // Start the server
         startServer();
     } catch (err) {
